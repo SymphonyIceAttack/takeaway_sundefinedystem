@@ -15,7 +15,7 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
 
     return (
         <div>
-            <Navbar maxWidth="full">
+            <Navbar maxWidth="full" isBordered={true}>
                 <NavbarContent className="">
                     <LuPizza size={30} />
                 </NavbarContent>
