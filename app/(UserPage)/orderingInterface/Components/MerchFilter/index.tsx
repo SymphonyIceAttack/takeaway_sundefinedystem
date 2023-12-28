@@ -1,14 +1,19 @@
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react'
 import React from 'react'
 interface Props {
-    MerchantArray: string[]
+    titleContent: string
+
+    Array: string[]
 }
-const index = ({ MerchantArray }: Props) => {
+const index = ({ Array, titleContent }: Props) => {
     return (
-        <Autocomplete label="选择商家" className="max-w-xs">
-            {MerchantArray.map((Merchant) => (
-                <AutocompleteItem key={Merchant} value={Merchant}>
-                    {Merchant}
+        <Autocomplete
+            label={titleContent}
+            className="max-w-xs"
+            onSelectionChange={(key) => {}}>
+            {Array.map((item) => (
+                <AutocompleteItem key={item} value={item}>
+                    {item}
                 </AutocompleteItem>
             ))}
         </Autocomplete>

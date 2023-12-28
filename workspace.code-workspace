@@ -10,6 +10,9 @@
             "path": "./app/(Auth)"
         },
         {
+            "path": "./app/(UserPage)"
+        },
+        {
             "path": "./app/(UserPage)/landing"
         },
         {
