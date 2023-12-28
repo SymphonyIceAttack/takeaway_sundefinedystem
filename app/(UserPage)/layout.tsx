@@ -15,28 +15,40 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
 
     return (
         <div>
-            <Navbar maxWidth="full" isBordered={true}>
+            <Navbar
+                maxWidth="full"
+                isBordered={true}
+                classNames={{
+                    item: [
+                        'flex',
+                        'relative',
+                        'h-full',
+                        'items-center',
+                        "data-[active=true]:after:content-['']",
+                        'data-[active=true]:after:absolute',
+                        'data-[active=true]:after:bottom-0',
+                        'data-[active=true]:after:left-0',
+                        'data-[active=true]:after:right-0',
+                        'data-[active=true]:after:h-[2px]',
+                        'data-[active=true]:after:rounded-[2px]',
+                        'data-[active=true]:after:bg-primary',
+                    ],
+                }}>
                 <NavbarContent className="">
-                    <LuPizza size={30} />
-                </NavbarContent>
-                <NavbarContent className="gap-4" justify="end">
-                    <NavbarItem>
-                        <Link color="foreground" href="#">
-                            Features
-                        </Link>
-                    </NavbarItem>
-                    <NavbarItem isActive>
-                        <Link href="#" aria-current="page">
-                            Customers
-                        </Link>
-                    </NavbarItem>
-                    <NavbarItem>
-                        <Link color="foreground" href="#">
-                            Integrations
+                    <NavbarItem isActive={pathname === '/landing'}>
+                        <Link
+                            href="/landing"
+                            color={
+                                pathname === '/landing'
+                                    ? 'primary'
+                                    : 'foreground'
+                            }>
+                            <LuPizza size={30} />
                         </Link>
                     </NavbarItem>
                 </NavbarContent>
-                {pathname === '/landing' && (
+
+                {pathname === '/landing' ? (
                     <NavbarContent
                         className="mx-2"
                         justify="end"
@@ -52,6 +64,19 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                                 variant="flat">
                                 注册
                             </Button>
+                        </NavbarItem>
+                    </NavbarContent>
+                ) : (
+                    <NavbarContent className="gap-4" justify="end">
+                        <NavbarItem
+                            isActive={pathname === '/orderingInterface'}>
+                            <Link href="/orderingInterface">点餐</Link>
+                        </NavbarItem>
+                        <NavbarItem>
+                            <Link href="#">Customers</Link>
+                        </NavbarItem>
+                        <NavbarItem>
+                            <Link href="#">Integrations</Link>
                         </NavbarItem>
                     </NavbarContent>
                 )}

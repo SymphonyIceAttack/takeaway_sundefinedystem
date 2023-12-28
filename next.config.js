@@ -6,6 +6,7 @@ const nextConfig = {
         source: "/",
         destination: "/orderingInterface",
         permanent: true,
+        basePath: false,
       },
     ];
   },

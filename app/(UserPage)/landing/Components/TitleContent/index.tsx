@@ -1,5 +1,5 @@
 'use client'
-import { Button } from '@nextui-org/react'
+import { Button, Link } from '@nextui-org/react'
 import React from 'react'
 
 const index = () => {
@@ -13,7 +13,12 @@ const index = () => {
                     没时间做饭？ 没问题！ 我们将您最喜欢的菜肴送到您家门口。
                 </div>
                 <div className="mt-4 flex items-center justify-center ">
-                    <Button className="bg-black text-white">现在下单</Button>
+                    <Button
+                        as={Link}
+                        href="/orderingInterface"
+                        className="bg-black text-white">
+                        现在下单
+                    </Button>
                 </div>
             </div>
         </div>
