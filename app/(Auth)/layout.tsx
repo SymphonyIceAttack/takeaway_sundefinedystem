@@ -19,31 +19,22 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                 <NavbarContent className="">
                     <LuPizza size={30} />
                 </NavbarContent>
-                <NavbarContent className="gap-4" justify="end">
-                    <NavbarItem>
-                        <Link color="foreground" href="#">
-                            Features
-                        </Link>
-                    </NavbarItem>
-                    <NavbarItem isActive>
-                        <Link href="#" aria-current="page">
-                            Customers
-                        </Link>
-                    </NavbarItem>
-                    <NavbarItem>
-                        <Link color="foreground" href="#">
-                            Integrations
-                        </Link>
-                    </NavbarItem>
-                </NavbarContent>
-                {pathname === '/landing' && (
-                    <NavbarContent
-                        className="mx-2"
-                        justify="end"
-                        style={{ flexGrow: 0 }}>
+
+                <NavbarContent
+                    className="mx-2"
+                    justify="end"
+                    style={{ flexGrow: 0 }}>
+                    {pathname === '/signUp' ? (
                         <NavbarItem className="">
-                            <Link href="/login">登录</Link>
+                            <Button
+                                as={Link}
+                                color="primary"
+                                href="/login"
+                                variant="flat">
+                                登录
+                            </Button>
                         </NavbarItem>
+                    ) : (
                         <NavbarItem>
                             <Button
                                 as={Link}
@@ -53,8 +44,8 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                                 注册
                             </Button>
                         </NavbarItem>
-                    </NavbarContent>
-                )}
+                    )}
+                </NavbarContent>
             </Navbar>
             {children}
         </div>

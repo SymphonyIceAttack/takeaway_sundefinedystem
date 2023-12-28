@@ -7,6 +7,9 @@
             "path": "./app"
         },
         {
+            "path": "./app/(Auth)"
+        },
+        {
             "path": "./app/(UserPage)/landing"
         }
     ],
