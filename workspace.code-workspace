@@ -11,6 +11,9 @@
         },
         {
             "path": "./app/(UserPage)/landing"
+        },
+        {
+            "path": "./app/(UserPage)/orderingInterface"
         }
     ],
     "settings": {
