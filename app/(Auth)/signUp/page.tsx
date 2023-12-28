@@ -13,12 +13,12 @@ const page = () => {
     const [identity, setidentity] = useState('')
 
     return (
-        <div className="h-[100vh] flex justify-center items-center">
-            <div className="w-[35%] py-12 border-solid border-rose-300 border-1 rounded-lg shadow-lg">
-                <div className="text-[40px] font-bold text-center mt-4">
+        <div className="flex h-[100vh] items-center justify-center">
+            <div className="w-[35%] rounded-lg border-[1px] border-solid border-rose-300 py-12 shadow-lg">
+                <div className="mt-4 text-center text-[40px] font-bold">
                     注册
                 </div>
-                <form className="mt-8 w-[80%] flex flex-col items-center gap-8 mx-auto">
+                <form className="mx-auto mt-8 flex w-[80%] flex-col items-center gap-8">
                     <Input
                         size={'md'}
                         variant="bordered"
@@ -53,7 +53,7 @@ const page = () => {
                         ))}
                     </Select>
                 </form>
-                <div className="w-[80%] mx-auto mt-8">
+                <div className="mx-auto mt-8 w-[80%]">
                     <Button className="w-full bg-black text-white" radius="sm">
                         注册
                     </Button>

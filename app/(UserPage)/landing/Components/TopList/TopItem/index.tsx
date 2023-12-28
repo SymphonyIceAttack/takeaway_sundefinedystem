@@ -4,8 +4,8 @@ import React from 'react'
 
 const index = () => {
     return (
-        <div className="flex-1 p-8 box-border mx-8 bg-white border-1 border-solid border-black  shadow-md rounded-lg">
-            <div className="text-black text-[25px] font-bold">餐品名称</div>
+        <div className="mx-8 box-border flex-1 rounded-lg border-[1px] border-solid border-black bg-white  p-8 shadow-md">
+            <div className="text-[25px] font-bold text-black">餐品名称</div>
             <div className="flex flex-col ">
                 <Chip color="success" className="mt-4">
                     今日销量:123

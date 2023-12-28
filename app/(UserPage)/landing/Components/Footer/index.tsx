@@ -2,7 +2,7 @@ import React from 'react'
 import { LiaCopyrightSolid } from 'react-icons/lia'
 const index = () => {
     return (
-        <div className="bg-white h-12 flex items-center justify-between">
+        <div className="flex h-12 items-center justify-between bg-white">
             <div className="flex items-center  px-8 ">
                 <LiaCopyrightSolid />
                 <span>外卖服务 版权所有</span>
