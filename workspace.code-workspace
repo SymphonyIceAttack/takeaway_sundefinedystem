@@ -17,6 +17,12 @@
         },
         {
             "path": "./app/(UserPage)/orderingInterface"
+        },
+        {
+            "path": "./app/(Admin)"
+        },
+        {
+            "path": "./app/(Admin)/takeoutData"
         }
     ],
     "settings": {

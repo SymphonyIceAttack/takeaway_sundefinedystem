@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: "/",
-        destination: "/orderingInterface",
+        destination: "/takeoutData",
         permanent: true,
         basePath: false,
       },
