@@ -72,11 +72,8 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                             isActive={pathname === '/orderingInterface'}>
                             <Link href="/orderingInterface">点餐</Link>
                         </NavbarItem>
-                        <NavbarItem>
-                            <Link href="#">Customers</Link>
-                        </NavbarItem>
-                        <NavbarItem>
-                            <Link href="#">Integrations</Link>
+                        <NavbarItem isActive={pathname === '/recommend'}>
+                            <Link href="/recommend">个性化推荐</Link>
                         </NavbarItem>
                     </NavbarContent>
                 )}

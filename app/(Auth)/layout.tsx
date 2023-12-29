@@ -17,7 +17,11 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
         <div>
             <Navbar maxWidth="full" isBordered={true}>
                 <NavbarContent className="">
-                    <LuPizza size={30} />
+                    <NavbarItem>
+                        <Link href="/landing" color={'foreground'}>
+                            <LuPizza size={30} />
+                        </Link>
+                    </NavbarItem>
                 </NavbarContent>
 
                 <NavbarContent
