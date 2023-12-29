@@ -8,6 +8,12 @@ const nextConfig = {
         permanent: true,
         basePath: false,
       },
+      {
+        source: "/admin",
+        destination: "/takeoutData",
+        permanent: true,
+        basePath: false,
+      },
     ];
   },
 };
