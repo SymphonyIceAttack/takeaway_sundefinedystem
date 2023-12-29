@@ -20,7 +20,7 @@ interface Props {
 
 const index: React.FC<Props> = ({ analyzeSales }) => {
     return (
-        <ResponsiveContainer className=" mt-6 h-full w-full">
+        <ResponsiveContainer className="  h-full w-full">
             {analyzeSales.length > 0 ? (
                 <LineChart data={analyzeSales}>
                     <XAxis

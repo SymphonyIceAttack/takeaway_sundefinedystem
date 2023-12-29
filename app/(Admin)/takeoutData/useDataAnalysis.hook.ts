@@ -8,11 +8,13 @@ import {
 } from "./reqDataAnalysis";
 
 export const useDataAnalysisHook = (): [
+  typeof isLoading,
   typeof analyzeSales,
   typeof AreaSales,
   typeof PriceAnalysisData,
   typeof AllProductList
 ] => {
+  const [isLoading, setisLoading] = useState(true);
   const [analyzeSales, setanalyzeSales] = useState<analyzeSalesItemType[]>([]);
   const [AreaSales, setAreaSales] = useState<AreaSalesItemType[]>([]);
   const [PriceAnalysisData, setPriceAnalysisData] = useState<
@@ -31,11 +33,18 @@ export const useDataAnalysisHook = (): [
     setAreaSales(AreaSales);
     setPriceAnalysisData(PriceAnalysisData);
     setAllProductList(AllProductList);
+    setisLoading(false);
   }, []);
 
   useEffect(() => {
     reqInit();
   }, [reqInit]);
 
-  return [analyzeSales, AreaSales, PriceAnalysisData, AllProductList];
+  return [
+    isLoading,
+    analyzeSales,
+    AreaSales,
+    PriceAnalysisData,
+    AllProductList,
+  ];
 };

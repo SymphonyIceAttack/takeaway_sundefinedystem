@@ -1,4 +1,3 @@
-export const revalidate = 0;
 export type analyzeSalesItemType = {
   sold_total_last_at: number;
   mean: number;
