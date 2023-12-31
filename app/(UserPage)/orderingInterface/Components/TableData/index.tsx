@@ -8,52 +8,15 @@ import {
     TableCell,
     getKeyValue,
     Button,
+    Pagination,
+    Spinner,
 } from '@nextui-org/react'
+import { ProductItemType } from '@/types/product.type'
 
-interface RowType {
-    key: string
-    name: string
-    area: string
-    shop: string
-    number: number
-}
-
-const rows: RowType[] = [
-    {
-        key: '1',
-        name: 'Tony Reichert',
-        area: 'CEO',
-        shop: 'Active',
-        number: 12324,
-    },
-    {
-        key: '2',
-        name: 'Zoey Lang',
-        area: 'Technical Lead',
-        shop: 'Paused',
-        number: 12324,
-    },
-    {
-        key: '3',
-        name: 'Jane Fisher',
-        area: 'Senior Developer',
-        shop: 'Active',
-        number: 12324,
-    },
-]
 type ColumnType =
     | {
-          key: 'name'
-          label: '名称'
-      }
-    | {
-          key: 'area'
-          label: '校区'
-      }
-    | { key: 'shop'; label: '店家' }
-    | {
-          key: 'number'
-          label: '销量'
+          key: keyof ProductItemType
+          label: string
       }
     | {
           key: 'action'
@@ -61,19 +24,19 @@ type ColumnType =
       }
 const columns: ColumnType[] = [
     {
-        key: 'name',
+        key: 'goods_title',
         label: '名称',
     },
     {
-        key: 'area',
+        key: 'AreaTitle',
         label: '校区',
     },
     {
-        key: 'shop',
+        key: 'store_title',
         label: '店家',
     },
     {
-        key: 'number',
+        key: 'sold_total_all',
         label: '销量',
     },
     {
@@ -81,7 +44,7 @@ const columns: ColumnType[] = [
         label: '操作',
     },
 ]
-const SwitchActions = (item: RowType) => {
+const SwitchActions = (item: ProductItemType) => {
     return (
         <div className="flex justify-center gap-4">
             <Button>点餐</Button>
@@ -89,36 +52,56 @@ const SwitchActions = (item: RowType) => {
         </div>
     )
 }
-
-const index = () => {
+interface Props {
+    ProductList: ProductItemType[]
+    total: number
+    SetPage: (page: number) => void
+    isLoading: boolean
+}
+const index = ({ ProductList, total, SetPage, isLoading }: Props) => {
     return (
-        <Table aria-label="asdf">
-            <TableHeader columns={columns}>
-                {(column) => (
-                    <TableColumn
-                        key={column.key}
-                        style={{
-                            textAlign:
-                                column.key === 'action' ? 'center' : 'start',
-                        }}>
-                        {column.label}
-                    </TableColumn>
-                )}
-            </TableHeader>
-            <TableBody items={rows}>
-                {(item) => (
-                    <TableRow key={item.key}>
-                        {(columnKey) => (
-                            <TableCell>
-                                {columnKey !== 'action'
-                                    ? getKeyValue(item, columnKey)
-                                    : SwitchActions(item)}
-                            </TableCell>
-                        )}
-                    </TableRow>
-                )}
-            </TableBody>
-        </Table>
+        <>
+            <Table aria-label="xx">
+                <TableHeader columns={columns}>
+                    {(column) => (
+                        <TableColumn
+                            key={column.key}
+                            style={{
+                                textAlign:
+                                    column.key === 'action'
+                                        ? 'center'
+                                        : 'start',
+                            }}>
+                            {column.label}
+                        </TableColumn>
+                    )}
+                </TableHeader>
+                <TableBody items={ProductList} isLoading={isLoading}  loadingContent={<Spinner label="Loading..." />}>
+                    {(item) => (
+                        <TableRow key={item.id}>
+                            {(columnKey) => (
+                                <TableCell>
+                                    {columnKey !== 'action'
+                                        ? getKeyValue(item, columnKey)
+                                        : SwitchActions(item)}
+                                </TableCell>
+                            )}
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table>
+
+            <Pagination
+                className="mt-4 flex w-[100%]"
+                size="lg"
+                classNames={{ wrapper: 'gap-4 max-w-none mx-auto' }}
+                showControls
+                boundaries={3}
+                total={total}
+                initialPage={1}
+                onChange={SetPage}
+            />
+        </>
     )
 }
 

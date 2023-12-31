@@ -5,36 +5,24 @@ import TableData from './Components/TableData'
 import React, { useEffect, useState } from 'react'
 import { useMerchantArray } from './useMerchantArray.hook'
 import { useProductList } from './useProductList.hook'
+import { useFilterArraySelect } from './useFilterArraySelect.hook'
 
 const page = () => {
-    const AreaTypeArray: { key: string; value: string }[] = [
-        { key: AreaTypeEnum.HangZhouWan, value: AreaStringEnum.HangZhouWan },
-        {
-            key: AreaTypeEnum.HeadquarterBei,
-            value: '本部',
-        },
-        { key: AreaTypeEnum.XiangShan, value: AreaStringEnum.XiangShan },
-    ]
+    const [
+        AreaTypeArray,
+        MerchantArray,
+        SelectAreaId,
+        SelectMerCnantId,
+        AreaId,
+        MerChantId,
+    ] = useFilterArraySelect()
 
-    const [AreaId, setAreaId] = useState<null | string>(null)
-
-    const SelectAreaId = (AreaId: string) => {
-        setAreaId(AreaId)
-    }
-    const [MerchantArray] = useMerchantArray()
-
-    const [MerChantId, setMerChantId] = useState<null | string>(null)
-
-    useEffect(() => {
-        setMerChantId(null)
-    }, [AreaId])
-
-    const SelectMerCnantId = (MerChantId: string) => {
-        setMerChantId(MerChantId)
-    }
-
-    useProductList(MerChantId,AreaId)
-
+    const [
+        ProductList,
+        TotalListConount,
+        setinitPageNumber,
+        isProductListLoading,
+    ] = useProductList(MerChantId, AreaId)
     return (
         <div className="flex">
             <div className="flex w-96 flex-col items-center gap-4">
@@ -48,13 +36,7 @@ const page = () => {
                 />
                 <MerchFilter
                     onSelectionChange={SelectMerCnantId}
-                    Array={MerchantArray.filter((item) => {
-                        return (
-                            item.area_id === AreaId ||
-                            AreaId === '' ||
-                            AreaId === null
-                        )
-                    }).map((item) => ({
+                    Array={MerchantArray.map((item) => ({
                         key: item.id,
                         value: item.store_title,
                     }))}
@@ -62,7 +44,12 @@ const page = () => {
                 />
             </div>
             <div className=" box-border  max-h-[calc(100vh-80px)]  flex-1  overflow-scroll  p-4">
-                <TableData />
+                <TableData
+                    ProductList={ProductList}
+                    isLoading={isProductListLoading}
+                    total={TotalListConount}
+                    SetPage={setinitPageNumber}
+                />
             </div>
         </div>
     )
