@@ -3,17 +3,20 @@ import React from 'react'
 interface Props {
     titleContent: string
 
-    Array: string[]
+    Array: { key: string; value: string }[]
+    onSelectionChange: (key: string) => void
 }
-const index = ({ Array, titleContent }: Props) => {
+const index = ({ Array, titleContent, onSelectionChange }: Props) => {
     return (
         <Autocomplete
             label={titleContent}
             className="max-w-xs"
-            onSelectionChange={(key) => {}}>
+            onSelectionChange={(key) => {
+                onSelectionChange(key as string)
+            }}>
             {Array.map((item) => (
-                <AutocompleteItem key={item} value={item}>
-                    {item}
+                <AutocompleteItem key={item.key} value={item.value}>
+                    {item.value}
                 </AutocompleteItem>
             ))}
         </Autocomplete>

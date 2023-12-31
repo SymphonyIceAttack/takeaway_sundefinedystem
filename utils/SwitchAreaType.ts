@@ -1,9 +1,9 @@
 export enum AreaTypeEnum {
-  HeadquarterNan = "6059220700100002",
-  HeadquarterBei = "6059220600100006",
+  HeadquarterNan = "6059220800100004",
+  HeadquarterBei = "6059220800100004",
 
-  HangZhouWan = "6059220700100003",
-  XiangShan = "6059220700100004",
+  HangZhouWan = "6059220600100004",
+  XiangShan = "6059220600100005",
 }
 export enum AreaStringEnum {
   HeadquarterNan = "本部南区",
