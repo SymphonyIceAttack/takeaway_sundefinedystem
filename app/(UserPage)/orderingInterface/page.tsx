@@ -3,11 +3,15 @@ import { AreaStringEnum, AreaTypeEnum } from '@/utils/SwitchAreaType'
 import MerchFilter from './Components/MerchFilter'
 import TableData from './Components/TableData'
 import React, { useEffect, useState } from 'react'
-import { useMerchantArray } from './useMerchantArray.hook'
 import { useProductList } from './useProductList.hook'
 import { useFilterArraySelect } from './useFilterArraySelect.hook'
+import { useRouterGuard } from '@/hook/useRouterGuard.hook'
 
 const page = () => {
+    const [UserPayLoad] = useRouterGuard()
+
+    console.log(UserPayLoad)
+
     const [
         AreaTypeArray,
         MerchantArray,
