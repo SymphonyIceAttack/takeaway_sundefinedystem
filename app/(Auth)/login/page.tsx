@@ -3,10 +3,8 @@ import { TokenConstant } from '@/types/Token.constant'
 import { Button, Input } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-import useLocalStorage from 'react-use-localstorage'
 
 const page = () => {
-    const [token, setToken] = useLocalStorage(TokenConstant, '')
     const router = useRouter()
     const [account, setaccount] = useState('')
     const [password, setpassword] = useState('')
@@ -19,7 +17,10 @@ const page = () => {
             .then((res) => res.json())
             .then((res) => {
                 if (res.statusCode === 201) {
-                    setToken(`Bearer ${res.access_token}`)
+                    localStorage.setItem(
+                        TokenConstant,
+                        `Bearer ${res.access_token}`
+                    )
                     router.push('/')
                 } else {
                     console.log(res.statusCode)

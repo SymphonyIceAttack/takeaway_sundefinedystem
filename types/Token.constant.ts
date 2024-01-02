@@ -1,1 +1,1 @@
-export const TokenConstant ="TokenConstant"
+export const TokenConstant = "TokenConstant";

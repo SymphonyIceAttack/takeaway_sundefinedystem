@@ -2,13 +2,13 @@ import { TokenConstant } from "@/types/Token.constant";
 import { PayLoadType } from "@/types/payload.type";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import useLocalStorage from "react-use-localstorage";
 
 export const useRouterGuard = (): [typeof UserPayLoad] => {
   const router = useRouter();
-  const [UserPayLoad, setUserPayLoad] = useState<null | PayLoadType>();
-  const [token, setToken] = useLocalStorage(TokenConstant, "");
+  const [UserPayLoad, setUserPayLoad] = useState<null | PayLoadType>(null);
+
   useEffect(() => {
+    const token = localStorage.getItem(TokenConstant) || "";
     fetch(`${process.env.NEXT_PUBLIC_API_Backed}/users/checkLogin`, {
       headers: { authorization: token },
     })
@@ -23,7 +23,7 @@ export const useRouterGuard = (): [typeof UserPayLoad] => {
           router.push("/");
         }
       });
-  }, [token, router]);
+  }, [router]);
 
   return [UserPayLoad];
 };

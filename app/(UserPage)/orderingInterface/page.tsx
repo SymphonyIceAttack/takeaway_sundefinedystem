@@ -10,8 +10,6 @@ import { useRouterGuard } from '@/hook/useRouterGuard.hook'
 const page = () => {
     const [UserPayLoad] = useRouterGuard()
 
-    console.log(UserPayLoad)
-
     const [
         AreaTypeArray,
         MerchantArray,
