@@ -44,21 +44,36 @@ const columns: ColumnType[] = [
         label: '操作',
     },
 ]
-const SwitchActions = (item: ProductItemType) => {
+const SwitchActions = (
+    item: ProductItemType,
+    AddChartItem: (ProductItem: ProductItemType) => void
+) => {
     return (
         <div className="flex justify-center gap-4">
-            <Button>点餐</Button>
+            <Button
+                onClick={() => {
+                    AddChartItem(item)
+                }}>
+                点餐
+            </Button>
             <Button>反馈</Button>
         </div>
     )
 }
 interface Props {
+    AddChartItem: (ProductItem: ProductItemType) => void
     ProductList: ProductItemType[]
     total: number
     SetPage: (page: number) => void
     isLoading: boolean
 }
-const index = ({ ProductList, total, SetPage, isLoading }: Props) => {
+const index = ({
+    ProductList,
+    total,
+    SetPage,
+    isLoading,
+    AddChartItem,
+}: Props) => {
     return (
         <>
             <Table aria-label="xx">
@@ -76,18 +91,21 @@ const index = ({ ProductList, total, SetPage, isLoading }: Props) => {
                         </TableColumn>
                     )}
                 </TableHeader>
-                <TableBody items={ProductList} isLoading={isLoading}  loadingContent={<Spinner label="Loading..." />}>
-                    {(item) => (
+                <TableBody
+                    isLoading={isLoading}
+                    loadingContent={<Spinner label="Loading..." />}>
+                    {/* 这里会产生闭包陷阱，ProductList.map()可以避免发生闭包*/}
+                    {ProductList.map((item) => (
                         <TableRow key={item.id}>
                             {(columnKey) => (
                                 <TableCell>
                                     {columnKey !== 'action'
                                         ? getKeyValue(item, columnKey)
-                                        : SwitchActions(item)}
+                                        : SwitchActions(item, AddChartItem)}
                                 </TableCell>
                             )}
                         </TableRow>
-                    )}
+                    ))}
                 </TableBody>
             </Table>
 

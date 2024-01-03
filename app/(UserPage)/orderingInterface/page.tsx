@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { useProductList } from './useProductList.hook'
 import { useFilterArraySelect } from './useFilterArraySelect.hook'
 import { useRouterGuard } from '@/hook/useRouterGuard.hook'
+import { useChartArrayHook } from './useChartArray.hook'
 
 const page = () => {
     const [UserPayLoad] = useRouterGuard()
@@ -26,6 +27,9 @@ const page = () => {
         setinitPageNumber,
         isProductListLoading,
     ] = useProductList(MerChantId, AreaId)
+
+    const [ChartArray, TotalPrice, AddChartItem, DeleteChartItem] =
+        useChartArrayHook()
     return (
         <div className="flex">
             <div className="flex  w-96 flex-col items-center gap-4 ">
@@ -45,10 +49,15 @@ const page = () => {
                     }))}
                     titleContent={'选择商家'}
                 />
-                <Chart />
+                <Chart
+                    TotalPrice={TotalPrice}
+                    ChartArray={ChartArray}
+                    DeleteChartItem={DeleteChartItem}
+                />
             </div>
             <div className=" box-border  max-h-[calc(100vh-80px)]  flex-1  overflow-scroll  p-4">
                 <TableData
+                    AddChartItem={AddChartItem}
                     ProductList={ProductList}
                     isLoading={isProductListLoading}
                     total={TotalListConount}
