@@ -3,6 +3,7 @@ import { TokenConstant } from '@/types/Token.constant'
 import { Button, Input } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 
 const page = () => {
     const router = useRouter()
@@ -22,8 +23,10 @@ const page = () => {
                         `Bearer ${res.access_token}`
                     )
                     router.push('/')
+                    toast('登录成功')
                 } else {
                     console.log(res.statusCode)
+                    toast('登录失败')
                 }
             })
     }

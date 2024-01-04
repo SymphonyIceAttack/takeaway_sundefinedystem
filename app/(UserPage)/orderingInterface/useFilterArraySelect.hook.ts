@@ -19,7 +19,7 @@ export const useFilterArraySelect = (): [
     { key: AreaTypeEnum.XiangShan, value: AreaStringEnum.XiangShan },
   ];
 
-  const [AreaId, setAreaId] = useState<null | string>(AreaTypeEnum.XiangShan);
+  const [AreaId, setAreaId] = useState<null | string>(null);
 
   const SelectAreaId = (AreaId: string) => {
     setAreaId(AreaId);

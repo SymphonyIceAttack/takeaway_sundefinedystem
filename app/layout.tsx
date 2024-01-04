@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import NextUIProvider from './NextUiProvider'
-import IconContextProvider from './IconContextProvider'
+import 'react-toastify/dist/ReactToastify.css'
+import NextUIProvider from './LayoutProvider/NextUiProvider'
+import IconContextProvider from './LayoutProvider/IconContextProvider'
+import ToasProvider from './LayoutProvider/ToasProvider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -21,6 +23,7 @@ export default function RootLayout({
                 <NextUIProvider>
                     <IconContextProvider>{children}</IconContextProvider>
                 </NextUIProvider>
+                <ToasProvider />
             </body>
         </html>
     )

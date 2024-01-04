@@ -2,6 +2,7 @@ import { TokenConstant } from "@/types/Token.constant";
 import { PayLoadType } from "@/types/payload.type";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export const useRouterGuard = (): [typeof UserPayLoad] => {
   const router = useRouter();
@@ -20,6 +21,7 @@ export const useRouterGuard = (): [typeof UserPayLoad] => {
             username: res.user.username,
           });
         } else {
+          toast("登录验证过期");
           router.push("/");
         }
       });

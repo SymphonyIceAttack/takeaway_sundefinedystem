@@ -6,8 +6,14 @@ interface Props {
     ChartArray: ChartItemType[]
     DeleteChartItem: (ChartItem: ChartItemType) => void
     TotalPrice: number
+    CreateOrder: () => void
 }
-const index = ({ ChartArray, DeleteChartItem, TotalPrice }: Props) => {
+const index = ({
+    ChartArray,
+    DeleteChartItem,
+    TotalPrice,
+    CreateOrder,
+}: Props) => {
     return (
         <div className=" mt-4  w-[100%] max-w-[20rem] rounded-xl border-2 border-solid border-gray-200 ">
             <div className="text-center text-[30px] font-bold">购物车</div>
@@ -31,7 +37,9 @@ const index = ({ ChartArray, DeleteChartItem, TotalPrice }: Props) => {
                 </span>
             </div>
             <div className="my-8 flex items-center">
-                <Button className="mx-auto w-[80%] bg-black text-white">
+                <Button
+                    className="mx-auto w-[80%] bg-black text-white"
+                    onClick={CreateOrder}>
                     下单
                 </Button>
             </div>

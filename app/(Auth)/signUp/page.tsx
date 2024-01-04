@@ -2,6 +2,7 @@
 import { Button, Input, Select, SelectItem } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 
 const page = () => {
     const router = useRouter()
@@ -23,6 +24,8 @@ const page = () => {
             .then((res) => res.status)
             .then((status) => {
                 status === 201 && router.push('/login')
+                status === 201 && toast('注册成功')
+                status !== 201 && toast('注册失败')
             })
     }
 

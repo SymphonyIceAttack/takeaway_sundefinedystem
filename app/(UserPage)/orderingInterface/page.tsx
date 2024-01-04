@@ -28,7 +28,7 @@ const page = () => {
         isProductListLoading,
     ] = useProductList(MerChantId, AreaId)
 
-    const [ChartArray, TotalPrice, AddChartItem, DeleteChartItem] =
+    const [ChartArray, TotalPrice, AddChartItem, DeleteChartItem, CreateOrder] =
         useChartArrayHook()
     return (
         <div className="flex">
@@ -50,6 +50,7 @@ const page = () => {
                     titleContent={'选择商家'}
                 />
                 <Chart
+                    CreateOrder={CreateOrder}
                     TotalPrice={TotalPrice}
                     ChartArray={ChartArray}
                     DeleteChartItem={DeleteChartItem}
