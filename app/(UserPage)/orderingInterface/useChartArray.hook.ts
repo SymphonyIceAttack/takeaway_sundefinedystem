@@ -84,11 +84,9 @@ export const useChartArrayHook = (): [
       return map;
     }, new Map<string, ChartItemType[]>());
 
-    const PromiseAllArray: Promise<any>[] = [];
-
-    mergedMap.forEach((value, key) => {
-      PromiseAllArray.push(
-        fetch(`${process.env.NEXT_PUBLIC_API_Backed}/order/CreateOrder`, {
+    for (const [key, value] of mergedMap) {
+      if (value !== undefined) {
+        await fetch(`${process.env.NEXT_PUBLIC_API_Backed}/order/CreateOrder`, {
           method: "POST",
           headers: { authorization: token, "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -98,11 +96,11 @@ export const useChartArrayHook = (): [
               number: item.number,
             })),
           }),
-        }).then((res) => res.json())
-      );
-    });
-    await Promise.all(PromiseAllArray);
-    toast("下单成功");
+        }).then((res) => res.json());
+        toast("下单成功");
+      }
+    }
+
     setChartArray([]);
   };
 
