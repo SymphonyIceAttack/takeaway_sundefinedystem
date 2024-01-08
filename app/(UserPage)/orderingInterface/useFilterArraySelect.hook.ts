@@ -19,27 +19,27 @@ export const useFilterArraySelect = (): [
     { key: AreaTypeEnum.XiangShan, value: AreaStringEnum.XiangShan },
   ];
 
-  const [AreaId, setAreaId] = useState<null | string>(null);
+  const [AreaId, setAreaId] = useState<undefined | string>();
 
-  const SelectAreaId = (AreaId: string) => {
+  const SelectAreaId = (AreaId: string | undefined) => {
     setAreaId(AreaId);
   };
   const [MerchantArray] = useMerchantArray();
 
-  const [MerChantId, setMerChantId] = useState<null | string>(null);
+  const [MerChantId, setMerChantId] = useState<undefined | string>();
 
   useEffect(() => {
-    setMerChantId(null);
+    setMerChantId(undefined);
   }, [AreaId]);
 
-  const SelectMerCnantId = (MerChantId: string) => {
+  const SelectMerCnantId = (MerChantId: string | undefined) => {
     setMerChantId(MerChantId);
   };
 
   return [
     AreaTypeArray,
     MerchantArray.filter((item) => {
-      return item.area_id === AreaId || AreaId === "" || AreaId === null;
+      return item.area_id === AreaId || AreaId === "" || AreaId === undefined;
     }),
     SelectAreaId,
     SelectMerCnantId,

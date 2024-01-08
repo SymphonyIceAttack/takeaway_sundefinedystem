@@ -75,6 +75,9 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                         <NavbarItem isActive={pathname === '/recommend'}>
                             <Link href="/recommend">个性化推荐</Link>
                         </NavbarItem>
+                        <NavbarItem isActive={pathname === '/userorder'}>
+                            <Link href="/userorder">个人订单</Link>
+                        </NavbarItem>
                     </NavbarContent>
                 )}
             </Navbar>

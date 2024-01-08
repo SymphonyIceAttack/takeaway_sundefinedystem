@@ -4,7 +4,7 @@ interface Props {
     titleContent: string
 
     Array: { key: string; value: string }[]
-    onSelectionChange: (key: string) => void
+    onSelectionChange: (key: string | undefined) => void
 }
 const index = ({ Array, titleContent, onSelectionChange }: Props) => {
     return (
@@ -12,7 +12,7 @@ const index = ({ Array, titleContent, onSelectionChange }: Props) => {
             label={titleContent}
             className="max-w-xs"
             onSelectionChange={(key) => {
-                onSelectionChange(key as string)
+                onSelectionChange(key === null ? undefined : (key as string))
             }}>
             {Array.map((item) => (
                 <AutocompleteItem key={item.key} value={item.value}>

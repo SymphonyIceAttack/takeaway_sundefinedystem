@@ -2,8 +2,8 @@ import { ProductItemType } from "@/types/product.type";
 import { useCallback, useEffect, useState } from "react";
 
 export const useProductList = (
-  MerChantId: string | null,
-  AreaId: string | null
+  MerChantId: string | undefined,
+  AreaId: string | undefined
 ): [
   typeof ProductList,
   typeof TotalListConount,
