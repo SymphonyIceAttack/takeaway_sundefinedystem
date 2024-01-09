@@ -5,7 +5,6 @@ export type OrderItemType = {
   number: number;
   totalPrice: number;
   MerTitle: string;
-  shop: { store_title: string };
 };
 export enum OrderStatus {
   all = "all",

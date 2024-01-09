@@ -12,6 +12,7 @@ import {
     Spinner,
 } from '@nextui-org/react'
 import { OrderItemType } from '@/types/order.type'
+import { OrderItemTypeShow } from '../../useOrderList.hook'
 function formatDateToYYYYMMDD(inputDate: string) {
     const date = new Date(inputDate)
     const year = date.getFullYear()
@@ -63,20 +64,35 @@ const columns: ColumnType[] = [
         label: '操作',
     },
 ]
-const SwitchActions = (item: any) => {
+const SwitchActions = (
+    item: OrderItemTypeShow,
+    ViewDetailList: (orderId: string) => void
+) => {
     return (
         <div className="flex justify-center gap-4">
-            <Button>详情</Button>
+            <Button
+                onClick={() => {
+                    ViewDetailList(item.id)
+                }}>
+                详情
+            </Button>
         </div>
     )
 }
 interface Props {
-    OrderList: OrderItemType[]
+    ViewDetailList: (orderId: string) => void
+    OrderList: OrderItemTypeShow[]
     total: number
     SetPage: (page: number) => void
     isLoading: boolean
 }
-const index = ({ OrderList, total, SetPage, isLoading }: Props) => {
+const index = ({
+    OrderList,
+    total,
+    SetPage,
+    isLoading,
+    ViewDetailList,
+}: Props) => {
     return (
         <>
             <Table aria-label="xx" className=" mx-auto mt-8 w-[95%]">
@@ -107,7 +123,7 @@ const index = ({ OrderList, total, SetPage, isLoading }: Props) => {
                                         columnKey !== 'create_time' &&
                                         getKeyValue(item, columnKey)}
                                     {columnKey === 'action' &&
-                                        SwitchActions(item)}
+                                        SwitchActions(item, ViewDetailList)}
                                     {columnKey === 'store_title' &&
                                         item.shop.store_title}
                                     {columnKey === 'create_time' &&
