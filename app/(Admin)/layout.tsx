@@ -40,7 +40,6 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                             className={'h-[60px] '}
                             key="/takeoutData"
                             startContent={<TbBrandGoogleAnalytics size={35} />}
-                            textValue="数据展示"
                             as={Link}
                             href="/takeoutData"
                             style={{
@@ -55,7 +54,6 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                             className={'h-[60px] '}
                             key="/test"
                             startContent={<TbBrandGoogleAnalytics size={35} />}
-                            textValue="test"
                             as={Link}
                             href="/test"
                             style={{

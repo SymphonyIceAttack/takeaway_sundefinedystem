@@ -39,7 +39,6 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                             className={'h-[60px] '}
                             key="/orderdeal"
                             startContent={<FaBorderNone size={35} />}
-                            textValue="订单列表"
                             as={Link}
                             href="/orderdeal"
                             style={{
