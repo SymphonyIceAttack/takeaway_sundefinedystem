@@ -1,3 +1,4 @@
+'use client'
 import { useRouterGuard } from '@/hook/useRouterGuard.hook'
 import React from 'react'
 
