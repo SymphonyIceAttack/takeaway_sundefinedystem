@@ -28,6 +28,12 @@
             "path": "./app/(UserPage)/userorder"
         },
         {
+            "path": "./app/(Shop)"
+        },
+        {
+            "path": "./app/(Shop)/orderdeal"
+        },
+        {
             "path": "./app/(Admin)"
         },
         {

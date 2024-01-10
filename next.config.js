@@ -6,13 +6,16 @@ const nextConfig = {
         source: "/",
         destination: "/landing",
         permanent: true,
-        basePath: false,
       },
       {
         source: "/admin",
         destination: "/takeoutData",
         permanent: true,
-        basePath: false,
+      },
+      {
+        source: "/shop",
+        destination: "/orderdeal",
+        permanent: true,
       },
     ];
   },

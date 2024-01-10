@@ -3,13 +3,12 @@ import { Button, Listbox, ListboxItem } from '@nextui-org/react'
 import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { LuPackage2 } from 'react-icons/lu'
 import { FaRegBell } from 'react-icons/fa'
-import { TbBrandGoogleAnalytics } from 'react-icons/tb'
+import { FaBorderNone } from 'react-icons/fa'
 import { usePathname, useRouter } from 'next/navigation'
-import { useRouterGuard } from '@/hook/useRouterGuard.hook'
+
 import Link from 'next/link'
 
 const layout = ({ children }: PropsWithChildren<{}>) => {
-    const [UserPayLoad] = useRouterGuard()
     const pathname = usePathname()
     const route = useRouter()
 
@@ -20,7 +19,7 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                     <div className="flex items-center">
                         <LuPackage2 size={30} className={'mx-4'} />
                         <span className={'text-[20px] font-bold'}>
-                            外卖管理端
+                            商家后台
                         </span>
                     </div>
                     <Button
@@ -38,31 +37,18 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                     <Listbox aria-label="Actions">
                         <ListboxItem
                             className={'h-[60px] '}
-                            key="/takeoutData"
-                            startContent={<TbBrandGoogleAnalytics size={35} />}
-                            textValue="数据展示"
+                            key="/orderdeal"
+                            startContent={<FaBorderNone size={35} />}
+                            textValue="订单列表"
                             as={Link}
-                            href="/takeoutData"
+                            href="/orderdeal"
                             style={{
                                 background:
-                                    pathname === '/takeoutData'
+                                    pathname === '/orderdeal'
                                         ? '#d4d4d8'
                                         : 'none',
                             }}>
-                            <span className={'text-[20px]'}>数据展示</span>
-                        </ListboxItem>
-                        <ListboxItem
-                            className={'h-[60px] '}
-                            key="/test"
-                            startContent={<TbBrandGoogleAnalytics size={35} />}
-                            textValue="test"
-                            as={Link}
-                            href="/test"
-                            style={{
-                                background:
-                                    pathname === '/test' ? '#d4d4d8' : 'none',
-                            }}>
-                            <span className={'text-[20px]'}>test</span>
+                            <span className={'text-[20px]'}>订单列表</span>
                         </ListboxItem>
                     </Listbox>
                 </div>

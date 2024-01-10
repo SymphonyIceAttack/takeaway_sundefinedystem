@@ -1,8 +1,10 @@
 'use client'
 import { Button, Link } from '@nextui-org/react'
 import React from 'react'
-
-const index = () => {
+interface Props {
+    GoToOrder: () => void
+}
+const index = ({ GoToOrder }: Props) => {
     return (
         <div className="flex h-[100vh] items-center justify-center bg-white">
             <div className="flex flex-col items-center justify-center">
@@ -13,10 +15,7 @@ const index = () => {
                     没时间做饭？ 没问题！ 我们将您最喜欢的菜肴送到您家门口。
                 </div>
                 <div className="mt-4 flex items-center justify-center ">
-                    <Button
-                        as={Link}
-                        href="/orderingInterface"
-                        className="bg-black text-white">
+                    <Button className="bg-black text-white" onClick={GoToOrder}>
                         现在下单
                     </Button>
                 </div>

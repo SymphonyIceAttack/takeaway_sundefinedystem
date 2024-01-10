@@ -115,7 +115,7 @@ const index = ({
                 classNames={{ wrapper: 'gap-4 max-w-none mx-auto' }}
                 showControls
                 boundaries={3}
-                total={Math.round(total / 10)}
+                total={Math.ceil(total / 10)}
                 initialPage={1}
                 onChange={SetPage}
             />

@@ -140,7 +140,7 @@ const index = ({
                 size="lg"
                 classNames={{ wrapper: 'gap-4 max-w-none mx-auto' }}
                 showControls
-                total={Math.round(total / 10)}
+                total={Math.ceil(total / 10)}
                 initialPage={1}
                 onChange={SetPage}
             />
