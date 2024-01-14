@@ -19,7 +19,7 @@ const index = ({ onSelectionChange, SelectStatusList }: Props) => {
                     )
                 }}
                 defaultItems={SelectStatusList}
-                defaultSelectedKey={OrderStatus.all}>
+                defaultSelectedKey={OrderStatus.pending}>
                 {(item) => (
                     <AutocompleteItem key={item.value}>
                         {item.label}

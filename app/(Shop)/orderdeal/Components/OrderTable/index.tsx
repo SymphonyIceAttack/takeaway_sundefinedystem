@@ -11,7 +11,7 @@ import {
     Pagination,
     Spinner,
 } from '@nextui-org/react'
-import { OrderItemType } from '@/types/order.type'
+import { OrderItemType, OrderStatus } from '@/types/order.type'
 import { OrderItemTypeShow } from '../../useOrderList.hook'
 function formatDateToYYYYMMDD(inputDate: string) {
     const date = new Date(inputDate)
@@ -66,7 +66,9 @@ const columns: ColumnType[] = [
 ]
 const SwitchActions = (
     item: OrderItemTypeShow,
-    ViewDetailList: (orderId: string) => void
+    ViewDetailList: (orderId: string) => void,
+    OrderReceive: (orderId: string) => void,
+    OrderFinish: (orderId: string) => void
 ) => {
     return (
         <div className="flex justify-center gap-4">
@@ -76,11 +78,29 @@ const SwitchActions = (
                 }}>
                 详情
             </Button>
+            {item.status === OrderStatus.pending && (
+                <Button
+                    onClick={() => {
+                        OrderReceive(item.id)
+                    }}>
+                    接单
+                </Button>
+            )}
+            {item.status === OrderStatus.OrderReceived && (
+                <Button
+                    onClick={() => {
+                        OrderFinish(item.id)
+                    }}>
+                    完成
+                </Button>
+            )}
         </div>
     )
 }
 interface Props {
     ViewDetailList: (orderId: string) => void
+    OrderReceive: (orderId: string) => void
+    OrderFinish: (orderId: string) => void
     OrderList: OrderItemTypeShow[]
     total: number
     SetPage: (page: number) => void
@@ -92,6 +112,8 @@ const index = ({
     SetPage,
     isLoading,
     ViewDetailList,
+    OrderReceive,
+    OrderFinish,
 }: Props) => {
     return (
         <>
@@ -123,7 +145,12 @@ const index = ({
                                         columnKey !== 'create_time' &&
                                         getKeyValue(item, columnKey)}
                                     {columnKey === 'action' &&
-                                        SwitchActions(item, ViewDetailList)}
+                                        SwitchActions(
+                                            item,
+                                            ViewDetailList,
+                                            OrderReceive,
+                                            OrderFinish
+                                        )}
                                     {columnKey === 'store_title' &&
                                         item.shop.store_title}
                                     {columnKey === 'create_time' &&

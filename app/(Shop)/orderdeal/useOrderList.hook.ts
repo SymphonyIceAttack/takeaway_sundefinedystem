@@ -10,7 +10,8 @@ export const useOrderList = (
   typeof OrderList,
   typeof TotalListConount,
   typeof setinitPageNumber,
-  typeof isOrderListLoading
+  typeof isOrderListLoading,
+  typeof setisOrderListLoading
 ] => {
   const [initPageNumber, setinitPageNumber] = useState(1);
   const [TotalListConount, setTotalListConount] = useState(0);
@@ -22,7 +23,7 @@ export const useOrderList = (
   > = useCallback(async () => {
     const token = localStorage.getItem(TokenConstant) || "";
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_Backed}/order/OrderList?pageNumber=${initPageNumber}&status=${status}`,
+      `${process.env.NEXT_PUBLIC_API_Backed}/shop/MerOrderList?pageNumber=${initPageNumber}&status=${status}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json", authorization: token },
@@ -34,18 +35,29 @@ export const useOrderList = (
   }, [status, initPageNumber]);
 
   useEffect(() => {
-    let isUpdate = true;
     setisOrderListLoading(true);
-    reqProductList().then(([res, code]) => {
-      if (code === 401) return;
-      isUpdate && setOrderList(res.list);
-      isUpdate && setTotalListConount(res.total);
-      isUpdate && setisOrderListLoading(false);
-    });
+  }, [reqProductList]);
+
+  useEffect(() => {
+    let isUpdate = true;
+
+    isOrderListLoading &&
+      reqProductList().then(([res, code]) => {
+        if (code === 401) return;
+        isUpdate && setOrderList(res.list);
+        isUpdate && setTotalListConount(res.total);
+        isUpdate && setisOrderListLoading(false);
+      });
     return () => {
       isUpdate = false;
     };
-  }, [reqProductList]);
+  }, [reqProductList, isOrderListLoading]);
 
-  return [OrderList, TotalListConount, setinitPageNumber, isOrderListLoading];
+  return [
+    OrderList,
+    TotalListConount,
+    setinitPageNumber,
+    isOrderListLoading,
+    setisOrderListLoading,
+  ];
 };

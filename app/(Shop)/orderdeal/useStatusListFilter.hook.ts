@@ -1,5 +1,5 @@
 import { OrderStatus } from "@/types/order.type";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useStatusListFilter = (): [
   typeof SelectStatusList,
@@ -13,7 +13,7 @@ export const useStatusListFilter = (): [
     { label: "全部", value: OrderStatus.all },
   ];
   const [SelectStatus, setSelectStatus] = useState<OrderStatus>(
-    OrderStatus.all
+    OrderStatus.pending
   );
 
   const SelectStatusChange = (key: OrderStatus) => {
