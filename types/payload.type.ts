@@ -1,1 +1,5 @@
-export type PayLoadType = { userid: string; username: string };
+export type PayLoadType = {
+  userid: string;
+  username: string;
+  identity: string;
+};

@@ -19,6 +19,7 @@ export const useRouterGuard = (): [typeof UserPayLoad] => {
           setUserPayLoad({
             userid: res.user.userid,
             username: res.user.username,
+            identity: res.user.identity,
           });
         } else {
           toast("登录验证过期");

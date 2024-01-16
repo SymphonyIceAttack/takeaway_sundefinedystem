@@ -5,7 +5,7 @@ import { LuPackage2 } from 'react-icons/lu'
 import { FaRegBell } from 'react-icons/fa'
 import { FaBorderNone } from 'react-icons/fa'
 import { usePathname, useRouter } from 'next/navigation'
-
+import { MdOutlineRestaurantMenu } from 'react-icons/md'
 import Link from 'next/link'
 
 const layout = ({ children }: PropsWithChildren<{}>) => {
@@ -48,6 +48,20 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                                         : 'none',
                             }}>
                             <span className={'text-[20px]'}>订单列表</span>
+                        </ListboxItem>
+                        <ListboxItem
+                            className={'h-[60px] '}
+                            key="/productlist"
+                            startContent={<MdOutlineRestaurantMenu size={35} />}
+                            as={Link}
+                            href="/productlist"
+                            style={{
+                                background:
+                                    pathname === '/productlist'
+                                        ? '#d4d4d8'
+                                        : 'none',
+                            }}>
+                            <span className={'text-[20px]'}>菜品列表</span>
                         </ListboxItem>
                     </Listbox>
                 </div>

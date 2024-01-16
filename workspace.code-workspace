@@ -34,6 +34,9 @@
             "path": "./app/(Shop)/orderdeal"
         },
         {
+            "path": "./app/(Shop)/productlist"
+        },
+        {
             "path": "./app/(Admin)"
         },
         {

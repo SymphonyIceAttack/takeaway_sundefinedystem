@@ -68,15 +68,17 @@ const page = () => {
                 onSelectionChange={SelectStatusChange}
                 SelectStatusList={SelectStatusList}
             />
-            <OrderTable
-                OrderFinish={OrderFinish}
-                OrderReceive={OrderReceive}
-                ViewDetailList={ViewDetailList}
-                OrderList={OrderList}
-                total={TotalListConount}
-                SetPage={setinitPageNumber}
-                isLoading={isOrderListLoading}
-            />
+            <div className=" box-border  max-h-[calc(100vh-80px)]  flex-1  overflow-scroll  p-4">
+                <OrderTable
+                    OrderFinish={OrderFinish}
+                    OrderReceive={OrderReceive}
+                    ViewDetailList={ViewDetailList}
+                    OrderList={OrderList}
+                    total={TotalListConount}
+                    SetPage={setinitPageNumber}
+                    isLoading={isOrderListLoading}
+                />
+            </div>
         </div>
     )
 }
