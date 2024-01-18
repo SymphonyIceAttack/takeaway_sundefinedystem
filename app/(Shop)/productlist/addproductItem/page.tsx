@@ -60,6 +60,7 @@ const page = () => {
                     onValueChange={(e) => setname(e)}
                 />
                 <Input
+                    min={0}
                     isRequired
                     name="price"
                     size={'md'}

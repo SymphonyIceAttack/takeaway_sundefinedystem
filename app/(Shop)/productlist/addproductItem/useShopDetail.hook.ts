@@ -7,15 +7,9 @@ export const useShopDetail = () => {
 
   const reqShopDetail = useCallback(async () => {
     const token = localStorage.getItem(TokenConstant) || "";
-    const merId: string = await fetch(
-      `${process.env.NEXT_PUBLIC_API_Backed}/shop/getMerId`,
-      {
-        headers: { "Content-Type": "application/json", authorization: token },
-      }
-    ).then((res) => res.json());
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_Backed}/shop/getShopDetail/${merId}`,
+      `${process.env.NEXT_PUBLIC_API_Backed}/shop/getShopDetail`,
       {
         headers: { "Content-Type": "application/json", authorization: token },
       }
