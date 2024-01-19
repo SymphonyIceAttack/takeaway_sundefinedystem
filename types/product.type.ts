@@ -7,4 +7,6 @@ export type ProductItemType = {
   AreaTitle: string;
   goods_price_sale: number;
   sold_total_all: number;
+  allowShopControl: boolean;
+  isShelvesShow: boolean;
 };

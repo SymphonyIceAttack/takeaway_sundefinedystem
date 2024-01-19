@@ -41,25 +41,56 @@ const columns: ColumnType[] = [
         key: 'goods_price_sale',
         label: '单价',
     },
+    {
+        key: 'allowShopControl',
+        label: '审核状态',
+    },
 
     {
         key: 'action',
         label: '操作',
     },
 ]
-const SwitchActions = (item: ProductItemType) => {
-    return <div className="flex justify-center gap-4"></div>
+const SwitchActions = (
+    item: ProductItemType,
+    changeProductStaus: (
+        productId: string,
+        isShelvesShow: boolean
+    ) => Promise<void>
+) => {
+    return (
+        <div className="flex justify-center gap-4">
+            {item.allowShopControl && (
+                <Button
+                    onClick={() => {
+                        changeProductStaus(item.id, !item.isShelvesShow)
+                    }}>
+                    {item.isShelvesShow ? '下架' : '上架'}
+                </Button>
+            )}
+        </div>
+    )
 }
 interface Props {
     ProductList: ProductItemType[]
     total: number
     SetPage: (page: number) => void
     isLoading: boolean
+    changeProductStaus: (
+        productId: string,
+        isShelvesShow: boolean
+    ) => Promise<void>
 }
-const index = ({ ProductList, total, SetPage, isLoading }: Props) => {
+const index = ({
+    ProductList,
+    total,
+    SetPage,
+    isLoading,
+    changeProductStaus,
+}: Props) => {
     return (
         <>
-            <Table aria-label="xx" className=" mx-auto mt-2 w-[95%]">
+            <Table aria-label="xx" className=" mx-auto w-[95%]">
                 <TableHeader columns={columns}>
                     {(column) => (
                         <TableColumn
@@ -84,7 +115,13 @@ const index = ({ ProductList, total, SetPage, isLoading }: Props) => {
                             <TableCell>{item.goods_title}</TableCell>
                             <TableCell>{item.sold_total_all}</TableCell>
                             <TableCell>{item.goods_price_sale}</TableCell>
-                            <TableCell>{SwitchActions(item)}</TableCell>
+                            <TableCell>
+                                {item.allowShopControl ? '已审核' : '未审核'}
+                            </TableCell>
+
+                            <TableCell>
+                                {SwitchActions(item, changeProductStaus)}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

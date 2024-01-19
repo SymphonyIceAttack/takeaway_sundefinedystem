@@ -4,6 +4,8 @@ import { Button, Input } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useShopDetail } from './useShopDetail.hook'
+import { TokenConstant } from '@/types/Token.constant'
+import { toast } from 'react-toastify'
 
 const page = () => {
     const router = useRouter()
@@ -13,8 +15,24 @@ const page = () => {
     const [name, setname] = useState('')
     const [price, setprice] = useState(0)
 
-    const AddProduct = () => {
-        console.log(name, price)
+    const AddProduct = async () => {
+        const token = localStorage.getItem(TokenConstant) || ''
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_API_Backed}/shop/createProduct`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: token,
+                },
+                body: JSON.stringify({
+                    goods_price_sale: price,
+                    goods_title: name,
+                }),
+            }
+        )
+        toast('新增成功')
+        router.back()
     }
 
     return (

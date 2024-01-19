@@ -9,7 +9,7 @@ const nextConfig = {
       },
       {
         source: "/admin",
-        destination: "/takeoutData",
+        destination: "/test",
         permanent: true,
       },
       {
