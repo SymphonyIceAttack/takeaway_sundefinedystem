@@ -2,7 +2,9 @@ import { TokenConstant } from "@/types/Token.constant";
 import { ProductItemType } from "@/types/product.type";
 import { useCallback, useEffect, useState } from "react";
 
-export const useProductList = (): [
+export const useProductList = (
+  isReview: "0" | "1"
+): [
   typeof ProductList,
   typeof TotalListConount,
   typeof setinitPageNumber,
@@ -19,7 +21,7 @@ export const useProductList = (): [
   > = useCallback(async () => {
     const token = localStorage.getItem(TokenConstant) || "";
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_Backed}/shop/MerProductList?pageNumber=${initPageNumber}`,
+      `${process.env.NEXT_PUBLIC_API_Backed}/shop/MerProductList?pageNumber=${initPageNumber}&isReview=${isReview}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json", authorization: token },
@@ -28,7 +30,7 @@ export const useProductList = (): [
     const result = await res.json();
     const code = res.status;
     return [result, code];
-  }, [initPageNumber]);
+  }, [initPageNumber, isReview]);
 
   useEffect(() => {
     setisProductListLoading(true);
