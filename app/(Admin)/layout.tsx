@@ -5,6 +5,7 @@ import { LuPackage2 } from 'react-icons/lu'
 import { FaRegBell } from 'react-icons/fa'
 import { TbBrandGoogleAnalytics } from 'react-icons/tb'
 import { usePathname, useRouter } from 'next/navigation'
+import { MdPreview } from 'react-icons/md'
 import { useRouterGuard } from '@/hook/useRouterGuard.hook'
 import Link from 'next/link'
 
@@ -42,6 +43,7 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                             startContent={<TbBrandGoogleAnalytics size={35} />}
                             as={Link}
                             href="/takeoutData"
+                            textValue="takeoutData"
                             style={{
                                 background:
                                     pathname === '/takeoutData'
@@ -51,6 +53,22 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                             <span className={'text-[20px]'}>数据展示</span>
                         </ListboxItem>
                         <ListboxItem
+                            textValue="reviewDishes"
+                            className={'h-[60px] '}
+                            key="/reviewDishes"
+                            startContent={<MdPreview size={35} />}
+                            as={Link}
+                            href="/reviewDishes"
+                            style={{
+                                background:
+                                    pathname === '/reviewDishes'
+                                        ? '#d4d4d8'
+                                        : 'none',
+                            }}>
+                            <span className={'text-[20px]'}>审核菜品</span>
+                        </ListboxItem>
+                        <ListboxItem
+                            textValue="test"
                             className={'h-[60px] '}
                             key="/test"
                             startContent={<TbBrandGoogleAnalytics size={35} />}

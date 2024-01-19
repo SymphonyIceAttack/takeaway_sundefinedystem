@@ -3,12 +3,14 @@ import { useCallback, useEffect, useState } from "react";
 
 export const useProductList = (
   MerChantId: string | null,
-  AreaId: string | null
+  AreaId: string | null,
+  allowControl: string | null
 ): [
   typeof ProductList,
   typeof TotalListConount,
   typeof setinitPageNumber,
-  typeof isProductListLoading
+  typeof isProductListLoading,
+  typeof setisProductListLoading
 ] => {
   const [initPageNumber, setinitPageNumber] = useState(1);
   const [TotalListConount, setTotalListConount] = useState(0);
@@ -24,30 +26,39 @@ export const useProductList = (
         body: JSON.stringify({
           MerChantId: MerChantId === null ? undefined : MerChantId,
           AreaId: AreaId === null ? undefined : AreaId,
-          isShelvesShow: true,
+          allowControl:
+            allowControl === null ? undefined : allowControl === "1",
+          isShelvesShow: undefined,
         }),
       }
     );
     return await res.json();
-  }, [MerChantId, AreaId, initPageNumber]);
+  }, [MerChantId, AreaId, initPageNumber, allowControl]);
+
+  useEffect(() => {
+    setisProductListLoading(true);
+  }, [reqProductList]);
 
   useEffect(() => {
     let isUpdate = true;
-    setisProductListLoading(true);
-    reqProductList().then((res: { list: ProductItemType[]; total: number }) => {
-      isUpdate && setProductList(res.list);
-      isUpdate && setTotalListConount(res.total);
-      isUpdate && setisProductListLoading(false);
-    });
+    isProductListLoading &&
+      reqProductList().then(
+        (res: { list: ProductItemType[]; total: number }) => {
+          isUpdate && setProductList(res.list);
+          isUpdate && setTotalListConount(res.total);
+          isUpdate && setisProductListLoading(false);
+        }
+      );
     return () => {
       isUpdate = false;
     };
-  }, [reqProductList]);
+  }, [reqProductList, isProductListLoading]);
 
   return [
     ProductList,
     TotalListConount,
     setinitPageNumber,
     isProductListLoading,
+    setisProductListLoading,
   ];
 };

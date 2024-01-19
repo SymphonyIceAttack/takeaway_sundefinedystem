@@ -41,6 +41,9 @@
         },
         {
             "path": "./app/(Admin)/takeoutData"
+        },
+        {
+            "path": "./app/(Admin)/reviewDishes"
         }
     ],
     "settings": {

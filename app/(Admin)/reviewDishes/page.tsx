@@ -2,16 +2,18 @@
 import { AreaStringEnum, AreaTypeEnum } from '@/utils/SwitchAreaType'
 import MerchFilter from './Components/MerchFilter'
 import TableData from './Components/TableData'
-import Chart from './Components/Chart'
+import ReviewSearch from './Components/ReviewSearch'
 import React, { useEffect, useState } from 'react'
 import { useProductList } from './useProductList.hook'
 import { useFilterArraySelect } from './useFilterArraySelect.hook'
 import { useRouterGuard } from '@/hook/useRouterGuard.hook'
-import { useChartArrayHook } from './useChartArray.hook'
+import { useIsReviewListFilter } from './useIsReviewListFilter.hook'
+import { TokenConstant } from '@/types/Token.constant'
+import { toast } from 'react-toastify'
 
 const page = () => {
     const [UserPayLoad] = useRouterGuard()
-
+    const [isReviewList, isReview, SelectStatusChange] = useIsReviewListFilter()
     const [
         AreaTypeArray,
         MerchantArray,
@@ -26,16 +28,31 @@ const page = () => {
         TotalListConount,
         setinitPageNumber,
         isProductListLoading,
-    ] = useProductList(MerChantId, AreaId)
+        setisProductListLoading,
+    ] = useProductList(MerChantId, AreaId, isReview)
+    const ReViewProduct = async (productId: string, isApprove: 0 | 1) => {
+        const token = localStorage.getItem(TokenConstant) || ''
+        const res = await fetch(
+            `${
+                process.env.NEXT_PUBLIC_API_Backed
+            }/admin/ReViewProduct?ProuctId=${productId}&isApprove=${
+                isApprove ? 1 : 0
+            }`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: token,
+                },
+            }
+        )
+        toast('审批成功')
+        setisProductListLoading(true)
+    }
 
-    const [ChartArray, TotalPrice, AddChartItem, DeleteChartItem, CreateOrder] =
-        useChartArrayHook()
     return (
-        <div className="flex">
-            <div className="flex  w-96 flex-col items-center gap-4 ">
-                <div className="mt-2 w-full text-center text-[30px] font-bold">
-                    筛选条件
-                </div>
+        <div className="">
+            <div className="flex    items-center gap-4  px-4 py-1">
                 <MerchFilter
                     selectId={AreaId}
                     Array={AreaTypeArray}
@@ -51,16 +68,15 @@ const page = () => {
                     }))}
                     titleContent={'选择商家'}
                 />
-                <Chart
-                    CreateOrder={CreateOrder}
-                    TotalPrice={TotalPrice}
-                    ChartArray={ChartArray}
-                    DeleteChartItem={DeleteChartItem}
+                <ReviewSearch
+                    isReview={isReview}
+                    isReviewList={isReviewList}
+                    onSelectionChange={SelectStatusChange}
                 />
             </div>
-            <div className=" box-border  max-h-[calc(100vh-80px)]  flex-1  overflow-scroll  p-4">
+            <div className="   flex-1   px-4 py-1">
                 <TableData
-                    AddChartItem={AddChartItem}
+                    ReViewProduct={ReViewProduct}
                     ProductList={ProductList}
                     isLoading={isProductListLoading}
                     total={TotalListConount}
