@@ -25,6 +25,9 @@
             "path": "./app/(UserPage)/orderingInterface"
         },
         {
+            "path": "./app/(UserPage)/recommend"
+        },
+        {
             "path": "./app/(UserPage)/userorder"
         },
         {

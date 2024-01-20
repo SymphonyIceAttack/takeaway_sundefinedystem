@@ -1,8 +1,29 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import DishesItem from './Components/DishesItem'
 import LoadingDishItem from './Components/LoadingDishItem'
+import { useRouterGuard } from '@/hook/useRouterGuard.hook'
+import { TokenConstant } from '@/types/Token.constant'
 const page = () => {
+    const [UserPayLoad] = useRouterGuard()
+    const reqRecommendList = useCallback(async () => {
+        const token = localStorage.getItem(TokenConstant) || ''
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_API_Backed}/recommend/userRecommend`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: token,
+                },
+            }
+        )
+    }, [])
+
+    useEffect(() => {
+        reqRecommendList()
+    }, [reqRecommendList])
+
     const [isLoading, setisLoading] = useState(true)
 
     useEffect(() => {
