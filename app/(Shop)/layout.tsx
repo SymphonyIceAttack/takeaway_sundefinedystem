@@ -41,7 +41,7 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                             startContent={<FaBorderNone size={35} />}
                             as={Link}
                             href="/orderdeal"
-                            textValue=""
+                            textValue="orderdeal"
                             style={{
                                 background:
                                     pathname === '/orderdeal'
@@ -56,7 +56,7 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                             startContent={<MdOutlineRestaurantMenu size={35} />}
                             as={Link}
                             href="/productlist"
-                            textValue=""
+                            textValue="productlist"
                             style={{
                                 background:
                                     pathname === '/productlist'

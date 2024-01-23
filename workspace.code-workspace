@@ -47,6 +47,9 @@
         },
         {
             "path": "./app/(Admin)/reviewDishes"
+        },
+        {
+            "path": "./app/(Admin)/checkShop"
         }
     ],
     "settings": {

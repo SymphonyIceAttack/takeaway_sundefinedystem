@@ -1,4 +1,6 @@
 'use client'
+import { AreaStringEnum, SwitchAreaTypetoString } from '@/utils/SwitchAreaType'
+import { AreaTypeEnum } from '@/utils/SwitchAreaType'
 import { Button, Input, Select, SelectItem } from '@nextui-org/react'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
@@ -6,31 +8,44 @@ import { toast } from 'react-toastify'
 
 const page = () => {
     const router = useRouter()
-    const IdentityArray: { value: string; label: string }[] = [
-        { value: '老师', label: '老师' },
-        { value: '学生', label: '学生' },
-        { value: '校园职工', label: '校园职工' },
+    const IdentityArray: { value: AreaTypeEnum; label: AreaStringEnum }[] = [
+        { value: AreaTypeEnum.HangZhouWan, label: AreaStringEnum.HangZhouWan },
+        {
+            value: AreaTypeEnum.HeadquarterBei,
+            label: AreaStringEnum.HeadquarterBei,
+        },
+        {
+            value: AreaTypeEnum.HeadquarterNan,
+            label: AreaStringEnum.HeadquarterNan,
+        },
+        { value: AreaTypeEnum.XiangShan, label: AreaStringEnum.XiangShan },
     ]
     const [account, setaccount] = useState('')
     const [password, setpassword] = useState('')
-    const [identity, setidentity] = useState('')
+    const [identity, setidentity] = useState<AreaTypeEnum>(
+        AreaTypeEnum.HangZhouWan
+    )
+    const [storeTitle, setStoreTitle] = useState('')
 
-    const SignUpSubmit = () => {
-        fetch(`${process.env.NEXT_PUBLIC_API_Backed}/users/SignUp`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ account, password, identity }),
-        })
-            .then((res) => res.status)
-            .then((status) => {
-                status === 201 && router.push('/login')
-                status === 201 && toast('注册成功')
-                status !== 201 && toast('注册失败')
-            })
-    }
-
-    const ShopSettle = () => {
-        router.push('/shopSettle')
+    const createShopSettle = async () => {
+        await fetch(
+            `${process.env.NEXT_PUBLIC_API_Backed}/shop-settle/createShopSettle`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    account: account,
+                    password: password,
+                    store_title: storeTitle,
+                    area_id: identity,
+                    area_title: SwitchAreaTypetoString(identity),
+                }),
+            }
+        ).then((res) => res.json())
+        toast('申请生成等待审批')
+        router.push('/login')
     }
 
     return (
@@ -39,10 +54,10 @@ const page = () => {
                 className="w-[35%] rounded-lg border-[1px] border-solid border-rose-300 py-12 shadow-lg"
                 onSubmit={(e) => {
                     e.preventDefault()
-                    SignUpSubmit()
+                    createShopSettle()
                 }}>
                 <div className="mt-4 text-center text-[40px] font-bold">
-                    用户注册
+                    商家入驻
                 </div>
                 <div className="mx-auto mt-8 flex w-[80%] flex-col items-center gap-8">
                     <Input
@@ -67,11 +82,11 @@ const page = () => {
                         }}
                     />
                     <Select
-                        label="选择身份"
+                        label="选择区域"
                         isRequired
                         className=""
                         onChange={(e) => {
-                            setidentity(e.target.value)
+                            setidentity(e.target.value as AreaTypeEnum)
                         }}>
                         {IdentityArray.map((Identity) => (
                             <SelectItem
@@ -81,21 +96,23 @@ const page = () => {
                             </SelectItem>
                         ))}
                     </Select>
+                    <Input
+                        isRequired
+                        size={'md'}
+                        variant="bordered"
+                        label="商家名称"
+                        value={storeTitle}
+                        onChange={(e) => {
+                            setStoreTitle(e.target.value)
+                        }}
+                    />
                 </div>
                 <div className="mx-auto mt-8 w-[80%]">
                     <Button
                         className="w-full bg-black text-white"
                         radius="sm"
                         type="submit">
-                        注册
-                    </Button>
-                    <Button
-                        className="mt-4 w-full bg-black text-white"
-                        radius="sm"
-                        onClick={() => {
-                            ShopSettle()
-                        }}>
-                        商家入驻
+                        入驻
                     </Button>
                 </div>
             </form>

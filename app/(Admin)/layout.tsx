@@ -68,6 +68,21 @@ const layout = ({ children }: PropsWithChildren<{}>) => {
                             <span className={'text-[20px]'}>审核菜品</span>
                         </ListboxItem>
                         <ListboxItem
+                            textValue="checkShop"
+                            className={'h-[60px] '}
+                            key="/checkShop"
+                            startContent={<MdPreview size={35} />}
+                            as={Link}
+                            href="/checkShop"
+                            style={{
+                                background:
+                                    pathname === '/checkShop'
+                                        ? '#d4d4d8'
+                                        : 'none',
+                            }}>
+                            <span className={'text-[20px]'}>入驻审核</span>
+                        </ListboxItem>
+                        <ListboxItem
                             textValue="test"
                             className={'h-[60px] '}
                             key="/test"
