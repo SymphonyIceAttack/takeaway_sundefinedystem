@@ -2,12 +2,14 @@
 import { AreaStringEnum, AreaTypeEnum } from '@/utils/SwitchAreaType'
 import MerchFilter from './Components/MerchFilter'
 import TableData from './Components/TableData'
+import InteractionModal from './Components/InteractionModal'
 import Chart from './Components/Chart'
 import React, { useEffect, useState } from 'react'
 import { useProductList } from './useProductList.hook'
 import { useFilterArraySelect } from './useFilterArraySelect.hook'
 import { useRouterGuard } from '@/hook/useRouterGuard.hook'
 import { useChartArrayHook } from './useChartArray.hook'
+import { useInteraction } from './useInteraction.hook'
 
 const page = () => {
     const [UserPayLoad] = useRouterGuard()
@@ -30,6 +32,14 @@ const page = () => {
 
     const [ChartArray, TotalPrice, AddChartItem, DeleteChartItem, CreateOrder] =
         useChartArrayHook()
+
+    const [
+        isInteractionModalShow,
+        ShowUserInteraction,
+        DidUserInteraction,
+        RequserInteraction,
+    ] = useInteraction()
+
     return (
         <div className="flex">
             <div className="flex  w-96 flex-col items-center gap-4 ">
@@ -60,6 +70,7 @@ const page = () => {
             </div>
             <div className=" box-border  max-h-[calc(100vh-80px)]  flex-1  overflow-scroll  p-4">
                 <TableData
+                    ShowUserInteraction={ShowUserInteraction}
                     AddChartItem={AddChartItem}
                     ProductList={ProductList}
                     isLoading={isProductListLoading}
@@ -67,6 +78,13 @@ const page = () => {
                     SetPage={setinitPageNumber}
                 />
             </div>
+            <InteractionModal
+                isOpen={isInteractionModalShow}
+                onClose={DidUserInteraction}
+                onOpenChange={() => {
+                    isInteractionModalShow && DidUserInteraction()
+                }}
+            />
         </div>
     )
 }

@@ -46,7 +46,8 @@ const columns: ColumnType[] = [
 ]
 const SwitchActions = (
     item: ProductItemType,
-    AddChartItem: (ProductItem: ProductItemType) => void
+    AddChartItem: (ProductItem: ProductItemType) => void,
+    ShowUserInteraction: (ProductId: string) => void
 ) => {
     return (
         <div className="flex justify-center gap-4">
@@ -56,11 +57,17 @@ const SwitchActions = (
                 }}>
                 点餐
             </Button>
-            <Button>反馈</Button>
+            <Button
+                onClick={() => {
+                    ShowUserInteraction(item.id)
+                }}>
+                反馈
+            </Button>
         </div>
     )
 }
 interface Props {
+    ShowUserInteraction: (ProductId: string) => void
     AddChartItem: (ProductItem: ProductItemType) => void
     ProductList: ProductItemType[]
     total: number
@@ -73,6 +80,7 @@ const index = ({
     SetPage,
     isLoading,
     AddChartItem,
+    ShowUserInteraction,
 }: Props) => {
     return (
         <>
@@ -102,7 +110,11 @@ const index = ({
                             <TableCell>{item.store_title}</TableCell>
                             <TableCell>{item.Dish.length}</TableCell>
                             <TableCell>
-                                {SwitchActions(item, AddChartItem)}
+                                {SwitchActions(
+                                    item,
+                                    AddChartItem,
+                                    ShowUserInteraction
+                                )}
                             </TableCell>
                         </TableRow>
                     ))}
