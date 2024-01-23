@@ -127,7 +127,7 @@ const index = ({
                                     {columnKey === 'store_title' &&
                                         item.shop.store_title}
                                     {columnKey === 'create_time' &&
-                                        formatDateToYYYYMMDD(item.create_time)}
+                                        item.create_time}
                                 </TableCell>
                             )}
                         </TableRow>
