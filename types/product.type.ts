@@ -1,3 +1,5 @@
+import { DishItemType } from "./dish.type";
+
 export type ProductItemType = {
   id: string;
   goods_title: string;
@@ -9,4 +11,5 @@ export type ProductItemType = {
   sold_total_all: number;
   allowShopControl: boolean;
   isShelvesShow: boolean;
+  Dish: DishItemType[];
 };

@@ -97,13 +97,13 @@ const index = ({
                     {/* 这里会产生闭包陷阱，ProductList.map()可以避免发生闭包*/}
                     {ProductList.map((item) => (
                         <TableRow key={item.id}>
-                            {(columnKey) => (
-                                <TableCell>
-                                    {columnKey !== 'action'
-                                        ? getKeyValue(item, columnKey)
-                                        : SwitchActions(item, AddChartItem)}
-                                </TableCell>
-                            )}
+                            <TableCell>{item.goods_title}</TableCell>
+                            <TableCell>{item.AreaTitle}</TableCell>
+                            <TableCell>{item.store_title}</TableCell>
+                            <TableCell>{item.Dish.length}</TableCell>
+                            <TableCell>
+                                {SwitchActions(item, AddChartItem)}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
