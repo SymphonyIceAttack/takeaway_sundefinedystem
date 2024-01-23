@@ -11,7 +11,7 @@ export const useIsReviewListFilter = (): [
     { label: "完成", value: SettleStatusEnum.Finish },
   ];
   const [isReview, setsReview] = useState<SettleStatusEnum>(
-    SettleStatusEnum.pending
+    SettleStatusEnum.Finish
   );
 
   const SelectStatusChange = (key: SettleStatusEnum) => {

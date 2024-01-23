@@ -17,7 +17,7 @@ const index = ({ onSelectionChange, isReviewList, isReview }: Props) => {
                 onSelectionChange={(key) => {
                     onSelectionChange(
                         key === null
-                            ? SettleStatusEnum.pending
+                            ? SettleStatusEnum.Finish
                             : (key as SettleStatusEnum)
                     )
                 }}
