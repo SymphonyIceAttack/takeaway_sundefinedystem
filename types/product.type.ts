@@ -11,5 +11,6 @@ export type ProductItemType = {
   sold_total_all: number;
   allowShopControl: boolean;
   isShelvesShow: boolean;
+  countLike: number;
   Dish: DishItemType[];
 };

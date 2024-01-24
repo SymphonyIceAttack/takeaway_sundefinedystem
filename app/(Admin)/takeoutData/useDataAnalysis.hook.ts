@@ -26,13 +26,13 @@ export const useDataAnalysisHook = (): [
   );
 
   const reqInit = useCallback(async () => {
-    const [analyzeSales, AreaSales, PriceAnalysisData, AllProductList] =
+    const [analyzeSales, AreaSales, PriceAnalysisData] =
       await reqDataAnalysis();
 
     setanalyzeSales(analyzeSales);
     setAreaSales(AreaSales);
     setPriceAnalysisData(PriceAnalysisData);
-    setAllProductList(AllProductList);
+
     setisLoading(false);
   }, []);
 

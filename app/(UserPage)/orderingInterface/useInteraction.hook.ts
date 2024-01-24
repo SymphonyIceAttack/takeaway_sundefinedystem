@@ -38,7 +38,6 @@ export const useInteraction = (): [
       }
     );
     toast("反馈成功");
-    DidUserInteraction();
   };
 
   return [

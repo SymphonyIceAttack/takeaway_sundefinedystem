@@ -41,12 +41,12 @@ const index: React.FC<Props> = ({ analyzeSales }) => {
                     <Line
                         dot={false}
                         type="monotone"
-                        dataKey="mean"
+                        dataKey="sum"
                         stroke="#ff1053"
                         strokeWidth={3}
                         strokeLinejoin="round"
                         strokeLinecap="round"
-                        name="均值"
+                        name="总和"
                     />
                 </LineChart>
             ) : (

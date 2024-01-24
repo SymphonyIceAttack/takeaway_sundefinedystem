@@ -1,55 +1,85 @@
 import {
     Button,
+    Input,
     Modal,
     ModalBody,
     ModalContent,
     ModalFooter,
     ModalHeader,
+    Radio,
+    RadioGroup,
 } from '@nextui-org/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 interface Props {
     isOpen: boolean
     onOpenChange: () => void
     onClose: () => void
+    RequserInteraction: (isLike: boolean, comment: string) => Promise<void>
 }
-const index = ({ isOpen, onOpenChange, onClose }: Props) => {
+const index = ({
+    isOpen,
+    onOpenChange,
+    onClose,
+    RequserInteraction,
+}: Props) => {
+    const [comment, setcomment] = useState('')
+
+    const [isLike, setisLike] = useState(true)
+
+    useEffect(() => {
+        setcomment('')
+        setisLike(true)
+    }, [isOpen])
+
     return (
         <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
             <ModalContent>
-                <ModalHeader className="flex flex-col gap-1">
-                    Modal Title
-                </ModalHeader>
-                <ModalBody>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam pulvinar risus non risus hendrerit venenatis.
-                        Pellentesque sit amet hendrerit risus, sed porttitor
-                        quam.
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam pulvinar risus non risus hendrerit venenatis.
-                        Pellentesque sit amet hendrerit risus, sed porttitor
-                        quam.
-                    </p>
-                    <p>
-                        Magna exercitation reprehenderit magna aute tempor
-                        cupidatat consequat elit dolor adipisicing. Mollit dolor
-                        eiusmod sunt ex incididunt cillum quis. Velit duis sit
-                        officia eiusmod Lorem aliqua enim laboris do dolor
-                        eiusmod. Et mollit incididunt nisi consectetur esse
-                        laborum eiusmod pariatur proident Lorem eiusmod et.
-                        Culpa deserunt nostrud ad veniam.
-                    </p>
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="danger" variant="light" onPress={onClose}>
-                        Close
-                    </Button>
-                    <Button color="primary" onPress={onClose}>
-                        Action
-                    </Button>
-                </ModalFooter>
+                <form
+                    id="LikeForm"
+                    onSubmit={(e) => {
+                        e.preventDefault()
+
+                        RequserInteraction(isLike, comment).then((res) => {
+                            onClose()
+                        })
+                    }}>
+                    <ModalHeader className="flex flex-col gap-1">
+                        反馈面板
+                    </ModalHeader>
+                    <ModalBody>
+                        <RadioGroup
+                            isRequired={true}
+                            label="点赞或点踩"
+                            onValueChange={(value) => {
+                                setisLike(value === 'Like')
+                            }}>
+                            <Radio value="Like">赞</Radio>
+                            <Radio value="unLike">踩</Radio>
+                        </RadioGroup>
+
+                        <Input
+                            isRequired
+                            size={'md'}
+                            variant="bordered"
+                            label="评论"
+                            value={comment}
+                            onChange={(e) => {
+                                setcomment(e.target.value)
+                            }}
+                        />
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button
+                            color="danger"
+                            variant="light"
+                            onPress={onClose}>
+                            关闭
+                        </Button>
+                        <Button color="primary" type="submit">
+                            反馈
+                        </Button>
+                    </ModalFooter>
+                </form>
             </ModalContent>
         </Modal>
     )

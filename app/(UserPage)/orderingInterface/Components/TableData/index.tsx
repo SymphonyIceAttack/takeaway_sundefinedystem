@@ -40,6 +40,10 @@ const columns: ColumnType[] = [
         label: '销量',
     },
     {
+        key: 'countLike',
+        label: '点赞',
+    },
+    {
         key: 'action',
         label: '操作',
     },
@@ -108,7 +112,8 @@ const index = ({
                             <TableCell>{item.goods_title}</TableCell>
                             <TableCell>{item.AreaTitle}</TableCell>
                             <TableCell>{item.store_title}</TableCell>
-                            <TableCell>{item.Dish.length}</TableCell>
+                            <TableCell>{item.sold_total_all}</TableCell>
+                            <TableCell>{item.countLike}</TableCell>
                             <TableCell>
                                 {SwitchActions(
                                     item,

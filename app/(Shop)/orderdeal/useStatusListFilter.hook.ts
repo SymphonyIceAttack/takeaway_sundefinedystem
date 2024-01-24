@@ -13,7 +13,7 @@ export const useStatusListFilter = (): [
     { label: "全部", value: OrderStatus.all },
   ];
   const [SelectStatus, setSelectStatus] = useState<OrderStatus>(
-    OrderStatus.pending
+    OrderStatus.all
   );
 
   const SelectStatusChange = (key: OrderStatus) => {

@@ -79,6 +79,7 @@ const page = () => {
                 />
             </div>
             <InteractionModal
+                RequserInteraction={RequserInteraction}
                 isOpen={isInteractionModalShow}
                 onClose={DidUserInteraction}
                 onOpenChange={() => {

@@ -36,7 +36,10 @@ const columns: ColumnType[] = [
         key: 'sold_total_all',
         label: '销量',
     },
-
+    {
+        key: 'countLike',
+        label: '点赞',
+    },
     {
         key: 'goods_price_sale',
         label: '单价',
@@ -113,7 +116,8 @@ const index = ({
                         <TableRow key={item.id}>
                             <TableCell>{item.store_title}</TableCell>
                             <TableCell>{item.goods_title}</TableCell>
-                            <TableCell>{item.Dish.length}</TableCell>
+                            <TableCell>{item.sold_total_all}</TableCell>
+                            <TableCell>{item.countLike}</TableCell>
                             <TableCell>{item.goods_price_sale}</TableCell>
                             <TableCell>
                                 {item.allowShopControl ? '已审核' : '未审核'}

@@ -1,8 +1,6 @@
 export type analyzeSalesItemType = {
   sold_total_last_at: number;
-  mean: number;
-  max: number;
-  min: number;
+
   sum: number;
 };
 export type AreaSalesItemType = {
@@ -20,15 +18,10 @@ export type AllProductItemType = {
   goods_price_sale: number;
 };
 export const reqDataAnalysis = async (): Promise<
-  [
-    analyzeSalesItemType[],
-    AreaSalesItemType[],
-    PriceAnalysisDataItemtype[],
-    AllProductItemType[]
-  ]
+  [analyzeSalesItemType[], AreaSalesItemType[], PriceAnalysisDataItemtype[]]
 > => {
   const analyzeSales: analyzeSalesItemType[] = await fetch(
-    `${process.env.NEXT_PUBLIC_API_Backed_One_URL}/data-analysis/analyzeSales`
+    `${process.env.NEXT_PUBLIC_API_Backed}/data-analysis/analyzeSales`
   ).then((res) => res.json());
 
   const AreaSales: AreaSalesItemType[] = await fetch(
@@ -38,9 +31,5 @@ export const reqDataAnalysis = async (): Promise<
     `${process.env.NEXT_PUBLIC_API_Backed_One_URL}/data-analysis/priceAnalysis`
   ).then((res) => res.json());
 
-  const AllProductList: AllProductItemType[] = await fetch(
-    `${process.env.NEXT_PUBLIC_API_Backed_One_URL}/data-analysis/itemSumSold`
-  ).then((res) => res.json());
-
-  return [analyzeSales, AreaSales, PriceAnalysisData, AllProductList];
+  return [analyzeSales, AreaSales, PriceAnalysisData];
 };
